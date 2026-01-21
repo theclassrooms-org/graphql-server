@@ -1,0 +1,34 @@
+type Classroom {
+    id: ID!
+    name: String!
+    description: String
+    type: ClassroomType!
+    status: ClassroomStatus!
+    instructorId: ID!
+    instructor: Instructor
+    classCode: String
+    endTime: String
+}
+
+type Instructor {
+    id: ID!
+    name: String!
+    avatar: String
+}
+
+enum ClassroomType {
+    PUBLIC
+    PRIVATE
+}
+
+enum ClassroomStatus {
+    ACTIVE
+    CLOSED
+    DELETED
+}
+
+type Query {
+    getClassroomById(id: ID!): Classroom
+    getClassroomsByInstructor(instructorId: ID!): [Classroom!]!
+    getAllClassrooms: [Classroom]
+}

@@ -1,0 +1,46 @@
+spring:
+  application:
+    name: graphql-server
+  threads:
+    virtual:
+      enabled: true
+  graphql:
+    graphiql:
+      enabled: true
+  grpc:
+    client:
+      enabled: true
+      channels:
+        classroom-service:
+          address: static://localhost:9090
+          negotiationType: plaintext
+      default-channel:
+        address: static://localhost:9090
+        negotiation-type: plaintext
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  health:
+    readinessstate:
+      enabled: true
+    livenessstate:
+      enabled: true
+  endpoint:
+    health:
+      probes:
+        enabled: true
+
+server:
+  port: 8060
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: ${EUREKA_DEFAULT_ZONE:http://localhost:8070/eureka/}
