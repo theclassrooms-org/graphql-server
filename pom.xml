@@ -33,6 +33,7 @@
 		<spring-cloud.version>2025.1.0</spring-cloud.version>
 		<spring-grpc.version>1.0.1</spring-grpc.version>
         <mapstruct.version>1.6.3</mapstruct.version>
+        <spring-boot-starter-aop.version>3.5.9</spring-boot-starter-aop.version>
     </properties>
 	<dependencies>
 		<dependency>
@@ -50,6 +51,19 @@
         <dependency>
             <groupId>org.springframework.grpc</groupId>
             <artifactId>spring-grpc-spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+            <version>${spring-boot-starter-aop.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.resilience4j</groupId>
+            <artifactId>resilience4j-spring-boot3</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-loadbalancer</artifactId>
         </dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>

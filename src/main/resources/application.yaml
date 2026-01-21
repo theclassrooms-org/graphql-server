@@ -44,3 +44,15 @@ eureka:
     register-with-eureka: true
     service-url:
       defaultZone: ${EUREKA_DEFAULT_ZONE:http://localhost:8070/eureka/}
+
+resilience4j:
+  retry:
+    instances:
+      classroomGrpc:
+        max-attempts: 3
+        wait-duration: 1000
+        retry-exceptions:
+          - io.grpc.StatusRuntimeException
+logging:
+  level:
+    io.github.resilience4j.retry: DEBUG

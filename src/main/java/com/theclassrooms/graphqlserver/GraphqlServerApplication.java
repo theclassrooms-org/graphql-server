@@ -2,9 +2,9 @@ package com.theclassrooms.graphqlserver;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.grpc.client.ImportGrpcClients;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
-@ImportGrpcClients(basePackageClasses = GraphqlServerApplication.class)
+@EnableDiscoveryClient
 @SpringBootApplication
 public class GraphqlServerApplication {
 
