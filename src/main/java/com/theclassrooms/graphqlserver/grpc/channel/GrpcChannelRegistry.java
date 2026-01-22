@@ -19,11 +19,11 @@ public class GrpcChannelRegistry {
     private final Map<String, ManagedChannel> channels = new ConcurrentHashMap<>();
 
     public ManagedChannel getChannel(ServiceInstance instance) {
-        final String key = instance.getInstanceId();
+        final String key = Objects.requireNonNull(instance).getInstanceId();
 
         return channels.computeIfAbsent(key, k -> {
             String grpcPort = Objects.requireNonNull(instance.getMetadata()).get("grpc-port");
-            log.info("Create gRPC channel -> {}:{}", instance.getHost(), grpcPort);
+            log.info("Create new gRPC channel -> {}:{}", instance.getHost(), grpcPort);
             return ManagedChannelBuilder.forAddress(instance.getHost(), Integer.parseInt(grpcPort))
                     .usePlaintext()
                     .build();
