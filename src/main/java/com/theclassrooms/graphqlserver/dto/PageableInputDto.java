@@ -4,16 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.UUID;
+import java.util.List;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class InstructorDto {
-    private UUID id;
-    private String name;
-    private String username;
-    private String avatar;
+public class PageableInputDto {
+    private Integer page;
+    private Integer size;
+    private List<String> sorts;
 }

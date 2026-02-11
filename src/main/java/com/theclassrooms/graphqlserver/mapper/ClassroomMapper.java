@@ -1,7 +1,7 @@
 package com.theclassrooms.graphqlserver.mapper;
 
 import com.google.protobuf.Timestamp;
-import com.theclassrooms.graphqlserver.dto.ClassroomDTO;
+import com.theclassrooms.graphqlserver.dto.ClassroomDto;
 import org.mapstruct.*;
 
 import java.time.Instant;
@@ -21,7 +21,7 @@ public interface ClassroomMapper {
             target = "type",
             expression = "java(ProtoEnumMapper.mapEnum(classroom.getType(), com.theclassrooms.graphqlserver.enums.ClassroomType.class))"
     )
-    ClassroomDTO toClassroomDTO(
+    ClassroomDto toClassroomDTO(
             com.theclassrooms.proto.classroom.Classroom classroom
     );
 

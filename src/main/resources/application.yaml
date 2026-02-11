@@ -56,3 +56,12 @@ resilience4j:
 logging:
   level:
     io.github.resilience4j.retry: DEBUG
+
+mock-data:
+  mappings:
+    - filename: classrooms.json
+      type: list
+      className: com.theclassrooms.graphqlserver.dto.ClassroomDto
+    - filename: instructors.json
+      type: list
+      className: com.theclassrooms.graphqlserver.dto.InstructorDto

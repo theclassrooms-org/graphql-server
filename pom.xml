@@ -82,7 +82,12 @@
             <artifactId>protobuf-java-util</artifactId>
             <version>4.27.5</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.graphql-java</groupId>
+            <artifactId>graphql-java-extended-scalars</artifactId>
+            <version>24.0</version>
+            <scope>compile</scope>
+        </dependency>
         <!-- MapStruct -->
         <dependency>
             <groupId>org.mapstruct</groupId>

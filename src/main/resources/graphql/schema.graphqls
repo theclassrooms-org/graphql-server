@@ -1,3 +1,28 @@
+scalar Long
+
+# ===== Pagination =====
+type PageInfo {
+    totalPages: Int!
+    totalElements: Long!
+    number: Int!
+    size: Int!
+    first: Boolean!
+    last: Boolean!
+    empty: Boolean!
+}
+
+input PageableInput {
+    page: Int = 0
+    size: Int = 10
+    sorts: [String!]  # Format: ["name,asc", "endTime,desc"]
+}
+
+# ===== Classroom =====
+type ClassroomPage {
+    content: [Classroom!]!
+    pageInfo: PageInfo!
+}
+
 type Classroom {
     id: ID!
     name: String!
@@ -8,12 +33,20 @@ type Classroom {
     instructor: Instructor
     classCode: String
     endTime: String
+    thumbnailUrl: String
+    bannerUrl: String
 }
 
 type Instructor {
     id: ID!
     name: String!
+    username: String!
     avatar: String
+}
+
+enum SortDirection {
+    ASC
+    DESC
 }
 
 enum ClassroomType {
@@ -31,4 +64,8 @@ type Query {
     getClassroomById(id: ID!): Classroom
     getClassroomsByInstructor(instructorId: ID!): [Classroom!]!
     getAllClassrooms: [Classroom]
+    getClassroomPageByInstructorId(
+        instructorId: ID!
+        pageable: PageableInput
+    ): ClassroomPage!
 }
