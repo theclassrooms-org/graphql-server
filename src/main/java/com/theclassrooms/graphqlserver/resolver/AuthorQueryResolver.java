@@ -39,6 +39,9 @@ public class AuthorQueryResolver {
                                 classroom -> instructorsMap.computeIfAbsent(classroom.getInstructorId(),
                                         (k) -> InstructorDto.builder()
                                                 .id(k)
+                                                .name("UNKNOWN")
+                                                .avatar("UNKNOWN")
+                                                .username("UNKNOWN")
                                                 .build())
                         ))
         );

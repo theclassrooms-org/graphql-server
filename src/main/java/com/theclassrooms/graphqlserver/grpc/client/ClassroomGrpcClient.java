@@ -1,9 +1,8 @@
 package com.theclassrooms.graphqlserver.grpc.client;
 
+import com.theclassrooms.graphqlserver.dto.PageableInputDto;
 import com.theclassrooms.graphqlserver.grpc.channel.GrpcStubFactory;
-import com.theclassrooms.proto.classroom.ClassroomServiceGrpc;
-import com.theclassrooms.proto.classroom.GetClassroomRequest;
-import com.theclassrooms.proto.classroom.GetClassroomResponse;
+import com.theclassrooms.proto.classroom.*;
 import io.github.resilience4j.retry.annotation.Retry;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,5 +24,25 @@ public class ClassroomGrpcClient {
                 .build();
 
         return stub.getClassroom(request);
+    }
+
+    @Retry(name = "classroomGrpc")
+    public GetClassroomPageByInstructorIdResponse getClassroomPageByInstructorId(String instructorId, PageableInputDto pageableInput) {
+        ClassroomServiceGrpc.ClassroomServiceBlockingStub stub = grpcStubFactory.getClassroomStub();
+
+        PageableRequest.Builder pageableBuilder = PageableRequest.newBuilder()
+                .setPage(pageableInput.getPage())
+                .setSize(pageableInput.getSize());
+
+        if (pageableInput.getSorts() != null && !pageableInput.getSorts().isEmpty()) {
+            pageableBuilder.addAllSorts(pageableInput.getSorts());
+        }
+
+        GetClassroomPageByInstructorIdRequest request = GetClassroomPageByInstructorIdRequest.newBuilder()
+                .setInstructorId(instructorId)
+                .setPageable(pageableBuilder.build())
+                .build();
+
+        return stub.getClassroomPageByInstructorId(request);
     }
 }
