@@ -4,6 +4,7 @@ import com.theclassrooms.graphqlserver.exception.NoAvailableServiceInstanceExcep
 import com.theclassrooms.graphqlserver.grpc.channel.GrpcChannelRegistry;
 import com.theclassrooms.graphqlserver.grpc.channel.GrpcStubFactory;
 import com.theclassrooms.proto.classroom.ClassroomServiceGrpc;
+import com.theclassrooms.user.proto.UserServiceGrpc;
 import io.grpc.ManagedChannel;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +27,13 @@ public class GrpcStubFactoryImpl implements GrpcStubFactory {
         ServiceInstance instance = getServiceInstance("classroom-service");
         ManagedChannel channel = grpcChannelRegistry.getChannel(instance);
         return ClassroomServiceGrpc.newBlockingStub(channel);
+    }
+
+    @Override
+    public UserServiceGrpc.UserServiceBlockingStub getUserStub() {
+        ServiceInstance instance = getServiceInstance("auth-service");
+        ManagedChannel channel = grpcChannelRegistry.getChannel(instance);
+        return UserServiceGrpc.newBlockingStub(channel);
     }
 
     ServiceInstance getServiceInstance(String serviceName) {

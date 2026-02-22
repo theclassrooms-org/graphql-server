@@ -56,6 +56,8 @@ resilience4j:
 logging:
   level:
     io.github.resilience4j.retry: DEBUG
+    io.grpc: DEBUG
+    org.springframework.grpc: DEBUG
 
 mock-data:
   mappings:
